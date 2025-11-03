@@ -147,12 +147,11 @@ main { flex: 1; }
 }
 .subcopy {
   font-weight: 300;
-  font-size: clamp(1px, 2.5vw, 17px);
+  font-size: clamp(11px, 3vw, 18px);
   margin: -3px 0 10px;
-}
-.subcopy b { font-weight: 400; }
+} 
 
-/* =========================
+/* ========================= 
    Cards
    ========================= */
 .cards { display: flex; flex-direction: column; gap: 16px; }

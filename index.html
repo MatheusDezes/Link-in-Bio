@@ -13,6 +13,14 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+
+    <!-- PRELOADER (logo Adinity) -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <img src="./assets/icon.svg" alt="Adinity" class="preloader__logo" />
+      <div class="preloader__ring" aria-hidden="true"></div>
+    </div>
+  </div>
   <!-- BG decorativo -->
   <div class="bg-logo" aria-hidden="true"></div>
 
@@ -79,6 +87,32 @@
   </footer>
 
   <script>
+      (function(){
+    const preloader = document.getElementById('preloader');
+
+    // tempo mínimo (deixa elegante) e máximo (fallback)
+    const MIN_SHOW = 400;   // ms
+    const MAX_SHOW = 2500;  // ms
+    const start = performance.now();
+
+    function hidePreloader() {
+      const elapsed = performance.now() - start;
+      const wait = Math.max(0, MIN_SHOW - elapsed);
+      setTimeout(() => {
+        preloader.classList.add('is-hidden');
+        // dispara sua animação de entrada existente
+        document.body.classList.add('page-enter');
+        // remove do DOM depois do fade
+        setTimeout(() => preloader.remove(), 600);
+      }, wait);
+    }
+
+    // esconde quando tudo carregou (imagens, css, etc.)
+    window.addEventListener('load', hidePreloader);
+    // fallback: se algo travar, some no máximo em MAX_SHOW
+    setTimeout(hidePreloader, MAX_SHOW);
+  })();
+  
     document.addEventListener('DOMContentLoaded', () => {
       // Força reflow antes de animar a página (evita flicker)
       document.body.classList.remove('page-enter');

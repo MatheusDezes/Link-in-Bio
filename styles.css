@@ -51,6 +51,58 @@ body {
 
 main { flex: 1; }
 
+/* ===== PRELOADER (logo Adinity) ===== */
+.preloader{
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(12,14,10,.92); /* fundo escuro do seu tema */
+  z-index: 9999;                  /* acima de tudo */
+  transition: opacity .45s ease, visibility .45s ease;
+}
+
+.preloader__inner{
+  display: grid;
+  place-items: center;
+  gap: 14px;
+  filter: drop-shadow(0 6px 32px rgba(0,0,0,.45));
+}
+
+.preloader__logo{
+  width: 120px;
+  height: auto;
+  animation: logoPulse 1.2s ease-in-out infinite;
+}
+
+.preloader__ring{
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid rgba(0,211,60,.18); /* seu verde suave */
+  border-top-color: #00d33c;            /* seu verde principal */
+  animation: spin 1s linear infinite;
+}
+
+.preloader.is-hidden{
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* animações */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@keyframes logoPulse {
+  0%, 100% { transform: scale(1);   filter: drop-shadow(0 0 0 rgba(0,211,60,0)); }
+  50%      { transform: scale(1.04); filter: drop-shadow(0 0 18px rgba(0,211,60,.45)); }
+}
+
+/* acessibilidade: reduz/zera animações se o usuário pedir */
+@media (prefers-reduced-motion: reduce){
+  .preloader__logo, .preloader__ring { animation: none !important; }
+}
+
 /* =========================
    BG decorativo fixo
    ========================= */
